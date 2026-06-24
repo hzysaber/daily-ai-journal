@@ -45,7 +45,7 @@ def git_push():
             return True
 
         # Git add
-        subprocess.run(["git", "add", md_file], check=True,
+        subprocess.run(["git", "add", md_file, "README.md"], check=True,
                        cwd=os.path.dirname(os.path.abspath(__file__)))
 
         # Git commit
