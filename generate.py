@@ -327,6 +327,9 @@ def main():
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(md)
 
+    # 6. 同步更新 README.md（打开仓库主页直接看到内容）
+    update_readme(md)
+
     print()
     print(f"✅ 日刊生成完成: {output_file}")
     print(f"   新闻: {len(news)} 条")
@@ -335,6 +338,21 @@ def main():
     print(f"   Token消耗: {total_tokens}")
 
     return output_file, False
+
+
+def update_readme(journal_md):
+    """把最新日刊内容写入 README.md"""
+    readme_path = os.path.join(OUTPUT_DIR, "README.md")
+    readme = (
+        "# 📅 Daily AI Journal\n\n"
+        "> 每日AI综合日刊 | 自动推送 | 保持 GitHub 绿色活跃 🟩\n\n"
+        "---\n\n"
+        f"{journal_md}\n\n"
+        "---\n\n"
+        "*由 [Hermes Agent](https://hermes-agent.nousresearch.com) 自动生成和维护*\n"
+    )
+    with open(readme_path, "w", encoding="utf-8") as f:
+        f.write(readme)
 
 
 if __name__ == "__main__":
